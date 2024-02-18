@@ -1,0 +1,23 @@
+.imagenPrincipal{
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 5px 12px 40px black;
+}
+.imagenPrincipal img{
+    width: 100%;
+    height: 100%;
+    filter: grayscale(60%);
+
+}
+
+.imagenPrincipal p{
+    font-size: 3rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 9px rgba(0,0,0,0.9);
+}
