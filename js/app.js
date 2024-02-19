@@ -1,6 +1,6 @@
 let lon;
 let lat;
-let fechaActual = document.getElementById('fechaActual')
+let fecha = document.getElementById('fechaActual')
 let temperatura = document.getElementById('temperatura')
 let localidad = document.getElementById('localidad')
 let urlBase;
@@ -8,6 +8,18 @@ let urlBase;
 
 window.addEventListener('load', ()=>{
     
+ //obtener la fecha actual para mostrar 
+let fechaActual = new Date();
+
+// Obtener el día, mes y año
+let dia = fechaActual.getDate();
+let mes = fechaActual.getMonth() + 1; // Los meses comienzan desde 0, por lo que sumamos 1
+let año = fechaActual.getFullYear();
+
+// Formatear la fecha en formato dd/mm/yyyy
+let fechaFormateada = `${dia < 10 ? '0' : ''}${dia}/${mes < 10 ? '0' : ''}${mes}/${año}`;
+fechaActual.innerHTML = fechaFormateada
+    fecha.textContent = fechaFormateada
  if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition((position)=>{
         //obtengo la localización del navegador
@@ -35,7 +47,6 @@ let consultarApi = async()=>{
             throw new Error('La solicitud no fue exitosa');
         }
         const dato = await respuesta.json();
-        console.log(dato)
         //reemplazar las variables por los datos
         localidad.textContent = dato.name + ", " + dato.sys.country
         temperatura.textContent = Math.floor(dato.main.temp - 273.15) + '°C'
