@@ -4,7 +4,7 @@ let fecha = document.getElementById('fechaActual')
 let temperatura = document.getElementById('temperatura')
 let localidad = document.getElementById('localidad')
 let urlBase;
-
+let spinner = document.getElementsByClassName('spinner')
 
 window.addEventListener('load', ()=>{
     
@@ -20,6 +20,7 @@ let año = fechaActual.getFullYear();
 let fechaFormateada = `${dia < 10 ? '0' : ''}${dia}/${mes < 10 ? '0' : ''}${mes}/${año}`;
 fechaActual.innerHTML = fechaFormateada
     fecha.textContent = fechaFormateada
+    
  if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition((position)=>{
         //obtengo la localización del navegador
@@ -31,6 +32,7 @@ fechaActual.innerHTML = fechaFormateada
         const api = 'f3f25df4cf6424a6d7095df2d61bcf79'
         //aquí guardo en una constante la url con la latitud, longitud, y el api 
         urlBase = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}`
+        
         consultarApi()
     })
  }
@@ -50,6 +52,8 @@ let consultarApi = async()=>{
         //reemplazar las variables por los datos
         localidad.textContent = dato.name + ", " + dato.sys.country
         temperatura.textContent = Math.floor(dato.main.temp - 273.15) + '°C'
+        //ocultar spinner
+        spinner[0].className = 'd-none'
     } catch(error){
         console.log(error);
     }
